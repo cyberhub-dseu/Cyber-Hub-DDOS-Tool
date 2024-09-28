@@ -1,15 +1,18 @@
-# Cyber Hub DDoS Tool (CHDT)
+Cyber Hub DDoS Tool (CHDT)
 
-This project is a simple ICMP flood tool designed for educational purposes. It allows users to flood a target IP with ICMP packets using multiple threads and windows.
+Description:
+The Cyber Hub DDoS Tool (CHDT) is an educational tool designed to demonstrate how a Distributed Denial of Service (DDoS) attack can flood a target using ICMP packets. The tool supports multi-threaded execution and allows launching multiple instances across terminals, making it suitable for simulating various levels of attack intensities.
 
-**Disclaimer: This tool is for educational purposes only. Misuse of this tool for malicious purposes is illegal.**
+Disclaimer: This tool is strictly for educational purposes and network testing. Unauthorized use against systems without consent is illegal. Use responsibly.
 
-## Features
-- Custom ICMP packet creation
-- Multi-threaded execution
-- ASCII banner using `pyfiglet`
-- Ability to launch multiple terminal windows
-- Adjustable attack intensity
+Features:
+Custom ICMP Packet Creation: Manually constructs ICMP echo request packets for precise flooding.
+Multi-Threading: Users can choose the number of threads to launch based on attack intensity (normal, medium, high, or custom).
+ASCII Banner with pyfiglet: Displays a fun, artistic banner when the script starts.
+Multiple Terminal Windows: Launches multiple instances of the tool to scale attacks across different windows.
+Cross-Platform Support: Compatible with Linux, macOS, and Windows.
+Purpose:
+This tool is designed to educate security professionals, ethical hackers, and students about DDoS vulnerabilities and protection techniques. It simulates how attackers might perform an ICMP flood attack and provides insight into traffic handling and server load testing.
 
 ## Installation
 
