@@ -28,7 +28,9 @@ This tool is designed to educate security professionals, ethical hackers, and st
 pip install pyfiglet
 
 Run the tool:
+
 python chdt.py
+
 Usage:
+
 Enter a target domain or IP and select the attack intensity (Normal, Medium, High, or Custom).
-python chdt.py
