@@ -1,0 +1,5 @@
+pyfiglet==0.8.post1  # For ASCII art rendering
+colorama==0.4.6      # For colored terminal text (cross-platform)
+click==8.1.3         # For creating command-line interfaces (optional but useful)
+termcolor==2.3.0     # For terminal text color customization
+rich==13.3.3         # For rich formatting of terminal output (optional, for more advanced features)
