@@ -50,6 +50,3 @@ Finally, you can run the Python script using:
 ```bash
 python chdt.py
 ```
-```
-
-Feel free to adjust any sections as needed!
