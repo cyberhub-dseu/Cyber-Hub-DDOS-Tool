@@ -17,11 +17,11 @@ This tool is designed to educate security professionals, ethical hackers, and st
 
 
 ## Requirements
-- Python 3.x
-- Libraries listed in `requirements.txt`
+To run this tool, you need to have the following Python packages installed:
 
-## Installation
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/chdt.git
-   cd chdt
+- `pyfiglet`
+
+You can install the required packages using:
+
+```bash
+pip install -r requirements.txt
