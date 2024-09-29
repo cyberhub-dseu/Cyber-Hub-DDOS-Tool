@@ -35,6 +35,7 @@ sudo apt install python3-venv
 cd Cyber-Hub-DDOS-Tool
 python3 -m venv venv
 source venv/bin/activate
+pip install setuptools
 ```
 
 ### Install Required Packages
