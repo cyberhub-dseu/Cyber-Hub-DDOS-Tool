@@ -16,12 +16,14 @@ The **Cyber Hub DDoS Tool (CHDT)** is an educational tool designed to demonstrat
 This tool is designed to educate security professionals, ethical hackers, and students about DDoS vulnerabilities and protection techniques. It simulates how attackers might perform an ICMP flood attack and provides insight into traffic handling and server load testing.
 
 
-## Requirements
-To run this tool, you need to have the following Python packages installed:
+## Usage
+**Clone the repository:
+` git clone https://github.com/yourusername/Cyber-Hub-DDOS-Tool.git
+cd Cyber-Hub-DDOS-Tool
 
-- `pyfiglet`
+**Create a virtual environment and activate it:
+`python3 -m venv venv
+source venv/bin/activate  # On Windows use: venv\Scripts\activate
 
-You can install the required packages using:
-
-```bash
-pip install -r requirements.txt
+## Install the required packages
+`pip install -r requirements.txt
