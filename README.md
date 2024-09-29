@@ -19,11 +19,17 @@ This tool is designed to educate security professionals, ethical hackers, and st
 ## Usage
 **Clone the repository:
 ` git clone https://github.com/cyberhub-dseu/Cyber-Hub-DDOS-Tool.git
-cd Cyber-Hub-DDOS-Tool
 
 **Create a virtual environment and activate it:
-`python3 -m venv venv
-source venv/bin/activate  # On Windows use: venv\Scripts\activate
+`sudo apt install python3-venv
+`cd /Cyber-Hub-DDOS-Tool
+python3 -m venv venv
+source venv/bin/activate
+
 
 ## Install the required packages
 `pip install -r requirements.txt
+
+**Run Python Script
+`python chdt.py
+
