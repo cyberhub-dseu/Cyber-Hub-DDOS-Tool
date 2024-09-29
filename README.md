@@ -22,9 +22,9 @@ This tool is designed to educate security professionals, ethical hackers, and st
 
 ##Create a virtual environment and activate it:
 `sudo apt install python3-venv
-`cd /Cyber-Hub-DDOS-Tool
-python3 -m venv venv
-source venv/bin/activate
+``cd /Cyber-Hub-DDOS-Tool
+``python3 -m venv venv
+`source venv/bin/activate
 
 
 ## Install the required packages
