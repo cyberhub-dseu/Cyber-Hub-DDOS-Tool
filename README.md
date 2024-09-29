@@ -18,7 +18,7 @@ This tool is designed to educate security professionals, ethical hackers, and st
 
 ## Usage
 **Clone the repository:
-` git clone https://github.com/yourusername/Cyber-Hub-DDOS-Tool.git
+` git clone https://github.com/cyberhub-dseu/Cyber-Hub-DDOS-Tool.git
 cd Cyber-Hub-DDOS-Tool
 
 **Create a virtual environment and activate it:
